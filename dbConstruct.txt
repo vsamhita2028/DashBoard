@@ -1,0 +1,39 @@
+app.get("/", (req, res) => {
+    let count = 1;
+    let i = 0;
+    let skills = ["Skill2", "Skill3", "Skill4", "Skill5", "Skill6", "Skill7", "Skill8", "Skill9", "Skill10", "Skill11"];
+    while (count != 101) {
+        let CoursesArray = data[i]["Courses"] != undefined ? data[i]["Courses"].split(", ").slice(0, 5) : [];
+        if (data[i]["College Name"] && data[i]["Established Year"] && data[i]["City"] && data[i]["State"] && data[i]["Country"] && CoursesArray) {
+            let max = 2022, min = parseInt(data[i]["Established Year"]);
+            for (let inc = 0; inc < 100; inc += 1) {
+                let batch = Math.floor(Math.random() * (max - min)) + min;
+                let end = Math.random() * 10;
+                let start = Math.random() * end;
+                const newStudent = new Students({
+                    Id: `stuid:${inc + 1}`,
+                    Name: `Student ${inc + 1}`,
+                    Batch: batch,
+                    College_Id: count,
+                    Skills: skills.slice(start, end),
+                    Branch: CoursesArray[Math.random() * CoursesArray.length]
+                })
+                newStudent.save();
+            }
+            const newCollege = new College({
+                Id: count,
+                Name: data[i]["College Name"],
+                FoundedYear: data[i]["Established Year"],
+                City: data[i]["City"],
+                State: data[i]["State"],
+                Country: data[i]["Country"],
+                Strength: 100,
+                Courses: CoursesArray,
+            })
+            newCollege.save()
+            count = count + 1;
+        }
+        i = i + 1;
+    }
+    res.send("done");
+})
