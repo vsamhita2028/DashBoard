@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState } from "react";
 import DoughnutChart from "./DoughnutChart";
 import { useHistory } from "react-router-dom";
+import { Spinner } from 'reactstrap';
 import { Row, Col, Card, CardBody, CardTitle, Container } from "reactstrap";
 const ByCourse = ({ setExtraValue }) => {
   const path = useContext(PathContext);
@@ -46,35 +47,22 @@ const ByCourse = ({ setExtraValue }) => {
     })
   }, [path], labels, values)
   if (hasError) {
-    return <div><h1>Loading....</h1></div>
+    return <div style={{display:"flex", textAlign : "center",alignItems:"center",justifyContent :"center",height:"80vh"}}>
+      <Spinner type="grow" color="success" >{" "}</Spinner>
+      <Spinner type="grow" color="danger" >{" "}</Spinner>
+      <Spinner type="grow" color="warning" >{" "}</Spinner>
+      <Spinner type="grow" color="info" >{" "}</Spinner>
+    </div>
   }
   return (
     <div>
       <Container fluid>
-        <Row className={"m-md-3 m-xs-2 mt-3"} >
-          <Col>
-            <Card>
-              <CardBody >
-                <CardTitle tag="h5">Card title</CardTitle>
-                <Row>
-                {/* <DoughnutChart labels={labels.slice(0, 71)} values={values.slice(0, 71)} options={options} setExtraValue={setExtraValue} height={220}  /> */}
-                  <Col md={6}>
-                    <DoughnutChart labels={labels.slice(0, 35)} values={values.slice(0, 35)} options={options} setExtraValue={setExtraValue} height={220}  />
-                  </Col>
-                  <Col md={6}>
-                    <DoughnutChart labels={labels.slice(35, 71)} values={values.slice(35, 71)} options={options} setExtraValue={setExtraValue} height={220}  />
-                  </Col>
-                </Row>
-              </CardBody>
-            </Card>
-          </Col>
-        </Row>
         <Row className={"m-md-3 m-xs-2 mt-3"}>
           <Col>
-            <Card>
+            <Card className={"box-shadow"} style={{border :"3px solid rgba(255, 99, 132, 0.2)"}}>
               <CardBody >
-                <CardTitle tag="h5">Card title</CardTitle>
-                <DoughnutChart labels={labels.slice(71, labels.length)} values={values.slice(71, labels.length)} options={options} setExtraValue={setExtraValue} height={220} width={300} />
+                <CardTitle tag="h5">Based on Common Courses</CardTitle>
+                <DoughnutChart labels={labels} values={values} options={options} setExtraValue={setExtraValue} height={550} width={600} />
               </CardBody>
             </Card>
           </Col>

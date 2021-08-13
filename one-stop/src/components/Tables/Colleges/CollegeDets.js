@@ -5,6 +5,7 @@ import { useState } from "react";
 import StudentDets from "../Students/StudentsDets"
 import SimilarColleges from "./SimilarColleges";
 import { Card,CardBody } from "reactstrap";
+import { Breadcrumb, BreadcrumbItem, Row, Col } from 'reactstrap';
 const CollegeDets = ({ name }) => {
     const path = useContext(PathContext);
     const [Students, setStudents] = useState(null);
@@ -28,6 +29,15 @@ const CollegeDets = ({ name }) => {
     }, [path, name])
     return (
         <div>
+            <Row >
+                <Col className={"pl-4 pt-2 mt-3 box-light"}>
+                    <Breadcrumb>
+                        <BreadcrumbItem >Home</BreadcrumbItem>
+                        <BreadcrumbItem >By Location</BreadcrumbItem>
+                        <BreadcrumbItem active>Similar Colleges and Student details</BreadcrumbItem>
+                    </Breadcrumb>
+                </Col>
+            </Row>
             <Card className="m-md-3 m-xs-2 mt-3">
                 <CardBody>
                     <SimilarColleges name={name} />

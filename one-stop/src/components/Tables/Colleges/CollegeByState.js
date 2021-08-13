@@ -5,6 +5,7 @@ import { useState } from "react";
 import MediumSize from "./MediumViewPort";
 import { Card } from "reactstrap";
 import { CardBody } from "reactstrap";
+import { Breadcrumb, BreadcrumbItem, Row, Col } from 'reactstrap';
 const CollegeByState = ({ state, setProps }) => {
     const path = useContext(PathContext);
     const [colleges, setColleges] = useState(null);
@@ -27,8 +28,16 @@ const CollegeByState = ({ state, setProps }) => {
         })
     }, [path, state])
     return (
-        <div className="m-md-3 m-xs-2 mt-3">
-            <Card>
+        <div >
+            <Row >
+                <Col className={"pl-4 pt-2 mt-3 box-light"}>
+                    <Breadcrumb>
+                        <BreadcrumbItem >Home</BreadcrumbItem>
+                        <BreadcrumbItem active>By Location</BreadcrumbItem>
+                    </Breadcrumb>
+                </Col>
+            </Row>
+            <Card className="m-md-3 m-xs-2 mt-3">
                 <CardBody>
                     <MediumSize data={colleges} setProps={setProps} />
                 </CardBody>
