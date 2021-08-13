@@ -6,9 +6,14 @@ import MediumSize from "./MediumViewPort";
 import { Card } from "reactstrap";
 import { CardBody } from "reactstrap";
 import { Breadcrumb, BreadcrumbItem, Row, Col } from 'reactstrap';
-const CollegeByState = ({ state, setProps }) => {
+const CollegeByState = ({ state, setProps,lightMode }) => {
     const path = useContext(PathContext);
     const [colleges, setColleges] = useState(null);
+    const dark ={
+        color: "white",
+        backgroundColor : "#2C2C2C",
+        border :"none",
+      }
     useEffect(() => {
         const headers = { 'Content-Type': 'application/json' };
         const finalPath = path + "/college/get-colleges-bystate";
@@ -37,9 +42,9 @@ const CollegeByState = ({ state, setProps }) => {
                     </Breadcrumb>
                 </Col>
             </Row>
-            <Card className="m-md-3 m-xs-2 mt-3">
+            <Card className="m-md-3 m-xs-2 mt-3" style={lightMode ?{color: "black"} : dark }>
                 <CardBody>
-                    <MediumSize data={colleges} setProps={setProps} />
+                    <MediumSize data={colleges} setProps={setProps} lightMode={lightMode} />
                 </CardBody>
             </Card>
         </div>

@@ -4,13 +4,17 @@ import axios from "axios";
 import { useState } from "react";
 import { Table } from 'reactstrap';
 
-const SimilarColleges = ({name}) => {
+const SimilarColleges = ({name,lightMode}) => {
     const path = useContext(PathContext);
     const [SimilarColleges,setSimilarColleges] = useState(null);
+    const dark ={
+        color: "white",
+        backgroundColor : "#2C2C2C",
+        border :"none",
+      }
     useEffect(() => {
         const headers = { 'Content-Type': 'application/json' };
         const finalPath = path + "/college/similar-colleges";
-
         axios.get(finalPath, {
             params :{
                 name : name
@@ -27,7 +31,7 @@ const SimilarColleges = ({name}) => {
     }, [path,name],SimilarColleges)
     return ( 
         <div>
-            <Table responsive>
+            <Table responsive borderless style={lightMode ?{color: "black"} : dark }>
                 <thead>
                     <tr>
                         <th>S.No</th>
@@ -41,7 +45,7 @@ const SimilarColleges = ({name}) => {
                 <tbody>
                     {SimilarColleges &&
                         SimilarColleges.map((elem, indx) => 
-                            <tr key={indx}>
+                            <tr key={indx} className={lightMode ? " ":"trdark"}>
                                 <th scope="row">{indx+1}</th>
                                 <td >{elem.Name}</td>
                                 <td>{elem.FoundedYear}</td>

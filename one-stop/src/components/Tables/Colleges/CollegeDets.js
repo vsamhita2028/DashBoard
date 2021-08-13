@@ -6,13 +6,18 @@ import StudentDets from "../Students/StudentsDets"
 import SimilarColleges from "./SimilarColleges";
 import { Card,CardBody } from "reactstrap";
 import { Breadcrumb, BreadcrumbItem, Row, Col } from 'reactstrap';
-const CollegeDets = ({ name }) => {
+
+const CollegeDets = ({ name, lightMode }) => {
     const path = useContext(PathContext);
     const [Students, setStudents] = useState(null);
+    const dark ={
+        color: "white",
+        backgroundColor : "#2C2C2C",
+        border :"none",
+      }
     useEffect(() => {
         const headers = { 'Content-Type': 'application/json' };
         const finalPath = path + "/college/college-dets";
-
         axios.get(finalPath, {
             params: {
                 name: name
@@ -32,20 +37,20 @@ const CollegeDets = ({ name }) => {
             <Row >
                 <Col className={"pl-4 pt-2 mt-3 box-light"}>
                     <Breadcrumb>
-                        <BreadcrumbItem >Home</BreadcrumbItem>
+                        <BreadcrumbItem > Home</BreadcrumbItem>
                         <BreadcrumbItem >By Location</BreadcrumbItem>
                         <BreadcrumbItem active>Similar Colleges and Student details</BreadcrumbItem>
                     </Breadcrumb>
                 </Col>
             </Row>
-            <Card className="m-md-3 m-xs-2 mt-3">
+            <Card className="m-md-3 m-xs-2 mt-3" style={lightMode ?{color: "black"} : dark }>
                 <CardBody>
-                    <SimilarColleges name={name} />
+                    <SimilarColleges name={name} lightMode={lightMode} />
                 </CardBody>
             </Card>
-            <Card className="m-md-3 m-xs-2 mt-3">
+            <Card className="m-md-3 m-xs-2 mt-3" style={lightMode ?{color: "black"} : dark }>
                 <CardBody>
-                    <StudentDets data={Students} />
+                    <StudentDets data={Students} lightMode={lightMode} />
                 </CardBody>
             </Card>
         </div>

@@ -1,16 +1,20 @@
 import { Table } from 'reactstrap';
 import { useHistory } from "react-router-dom";
-
-const MediumSize = ({ data,setProps }) => {
+const MediumSize = ({ data,setProps,lightMode }) => {
     let history = useHistory();
     const SetValues =(name)=>{
         setProps(name);
         history.push("/byLocation/collegeDets");
     }
+    const dark ={
+        color: "white",
+        backgroundColor : "#2C2C2C",
+        border :"none",
+      }
     return (
-        <div>
-            <Table responsive>
-                <thead>
+        <div >
+            <Table borderless responsive style={lightMode ?{color: "black"} : dark } >
+                <thead >
                     <tr>
                         <th>S.No</th>
                         <th>Name</th>
@@ -23,11 +27,11 @@ const MediumSize = ({ data,setProps }) => {
                 <tbody>
                     {data &&
                         data.map((elem, indx) => 
-                            <tr key={indx}>
+                            <tr key={indx} className={lightMode ? " ":"trdark"}>
                                 <th scope="row">{indx+1}</th>
-                                <td onClick={()=>SetValues(elem.Name)}>{elem.Name}</td>
+                                <td onClick={()=>SetValues(elem.Name)} className={"pointer"}>{elem.Name}</td>
                                 <td>{elem.FoundedYear}</td>
-                                <td>{elem.Courses}</td>
+                                <td className={"text-left"}>{elem.Courses}</td>
                                 <td>{elem.Strength}</td>
                                 <td>{elem.City}</td>
                             </tr>

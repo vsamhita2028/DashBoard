@@ -7,13 +7,18 @@ import { Card, CardBody } from "reactstrap";
 import { Breadcrumb, BreadcrumbItem, Row, Col } from 'reactstrap';
 
 
-const CollegeByCourses = ({ name }) => {
+const CollegeByCourses = ({ name,lightMode }) => {
     const path = useContext(PathContext);
     const [colleges, setColleges] = useState(null);
+    const dark ={
+        color: "white",
+        backgroundColor : "#2C2C2C",
+        border :"none",
+      }
     useEffect(() => {
         const headers = { 'Content-Type': 'application/json' };
         const finalPath = path + "/college/byCourses";
-
+        
         axios.get(finalPath, {
             params: {
                 name: name
@@ -35,9 +40,9 @@ const CollegeByCourses = ({ name }) => {
                     </Breadcrumb>
                 </Col>
             </Row>
-            <Card className="m-md-3 m-xs-2 mt-3" >
+            <Card className="m-md-3 m-xs-2 mt-3" style={lightMode ?{color: "black"} : dark } >
                 <CardBody>
-                    <Table responsive>
+                    <Table responsive borderless style={lightMode ?{color: "black"} : dark }>
                         <thead>
                             <tr>
                                 <th>S.No</th>
@@ -50,7 +55,7 @@ const CollegeByCourses = ({ name }) => {
                         <tbody>
                             {colleges &&
                                 colleges.map((elem, indx) =>
-                                    <tr key={indx}>
+                                    <tr key={indx} className={lightMode ? " ":"trdark"}>
                                         <th scope="row">{indx + 1}</th>
                                         <td >{elem.Name}</td>
                                         <td>{elem.FoundedYear}</td>

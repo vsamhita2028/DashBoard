@@ -8,12 +8,18 @@ import { Card } from "reactstrap";
 import { CardBody, CardTitle } from "reactstrap";
 import { Spinner } from 'reactstrap';
 
-const ByState = ({ setExtraValue }) => {
+const ByState = ({ setExtraValue,lightMode }) => {
   const path = useContext(PathContext);
   let history = useHistory();
   const [labels, setLabels] = useState(null);
   const [values, setValues] = useState(null);
   const [hasError, setHasError] = useState(true);
+  const dark ={
+    color: "white",
+    backgroundColor : "#2C2C2C",
+    border :"none",
+  }
+  //rgba(87, 87, 87, 0.1)
   const options = {
     plugins: {
       legend: {
@@ -56,11 +62,11 @@ const ByState = ({ setExtraValue }) => {
     </div>
   }
   return (
-    <div className={"m-md-3 m-xs-2 mt-3"}>
-      <Card>
+    <div className={"m-md-3 m-xs-2 mt-3"} >
+      <Card style={lightMode ?{color: "black"} : dark }>
         <CardBody>
         <CardTitle tag="h5">Based on Location</CardTitle>
-          <PieChart labels={labels} values={values} options={options} setExtraValue={setExtraValue} height={550} width={600}/>
+          <PieChart labels={labels} values={values} options={options} setExtraValue={setExtraValue} height={523} width={600} lightMode={lightMode}/>
         </CardBody>
       </Card>
     </div>

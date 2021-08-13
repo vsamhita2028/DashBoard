@@ -1,6 +1,9 @@
 .App {
   text-align: center;
-  height: 100vh;
+  height: 100%;
+  min-height: 100%;
+  padding: 0;
+  margin: 0;
 }
  
 .pl-4{
@@ -19,7 +22,39 @@
 .box-light{
   margin-left: 1.5em;
   margin-right: 1.5em;
-  background-color: rgb(230, 230, 230);
+  /* background-color: #F2F6FF; */
   border-radius: 10px;
 }
+.text-left{
+  text-align: left;
+}
 
+tr:nth-child(even) {
+  background-color: #F2F6FF;
+}
+.trdark:nth-child(even) {
+  background-color: #464646;
+  color : white
+}
+
+.card{
+  border: 1px solid rgb(241, 240, 240);
+  padding: 10px;
+  box-shadow: 5px 10px 18px rgba(87, 87, 87, 0.1);
+}
+.navbar{
+  box-shadow: 5px 10px 18px rgba(87, 87, 87, 0.1);
+}
+
+.mr-auto{
+  margin-left: auto ;
+  margin-right:  1em;
+}
+
+.link{
+  text-decoration: none;
+  color: grey;
+}
+ .pointer{
+  cursor: pointer;
+ }
