@@ -1,5 +1,12 @@
 import { Table } from 'reactstrap';
-const MediumSize = ({ data }) => {
+import { useHistory } from "react-router-dom";
+
+const MediumSize = ({ data,setProps }) => {
+    let history = useHistory();
+    const SetValues =(name)=>{
+        setProps(name);
+        history.push("/byLocation/collegeDets");
+    }
     return (
         <div>
             <Table responsive>
@@ -18,7 +25,7 @@ const MediumSize = ({ data }) => {
                         data.map((elem, indx) => 
                             <tr key={indx}>
                                 <th scope="row">{indx+1}</th>
-                                <td>{elem.Name}</td>
+                                <td onClick={()=>SetValues(elem.Name)}>{elem.Name}</td>
                                 <td>{elem.FoundedYear}</td>
                                 <td>{elem.Courses}</td>
                                 <td>{elem.Strength}</td>

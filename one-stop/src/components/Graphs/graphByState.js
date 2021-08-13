@@ -3,48 +3,63 @@ import { PathContext } from "../../PathContext";
 import axios from "axios";
 import { useState } from "react";
 import PieChart from "./PieChart";
-const ByState = ({setLevel,setExtraValue}) => {
+import { useHistory } from "react-router-dom";
+import { Card } from "reactstrap";
+import { CardBody, CardTitle } from "reactstrap";
+const ByState = ({ setExtraValue }) => {
   const path = useContext(PathContext);
-  const [labels,setLabels] =useState(null);
-  const [values,setValues] =useState(null);
+  let history = useHistory();
+  const [labels, setLabels] = useState(null);
+  const [values, setValues] = useState(null);
   const [hasError, setHasError] = useState(true);
   const options = {
-        onClick : function(evt, element){
-          setExtraValue(evt.chart.tooltip.dataPoints[0].label)
-          setLevel(1);
-        },
-        responsive: true,
-}
-  useEffect(()=>{
+    plugins: {
+      legend: {
+        display: false
+      }
+    },
+    onClick: function (evt, element) {
+      setExtraValue(evt.chart.tooltip.dataPoints[0].label);
+      history.push("/byLocation");
+    },
+    responsive: true,
+    maintainAspectRatio: false
+  }
+  useEffect(() => {
     const headers = { 'Content-Type': 'application/json' };
-				const finalPath = path + "/college/getcount-by-state";
+    const finalPath = path + "/college/getcount-by-state";
 
-				axios.get(finalPath,  {
-					headers: headers
-				}).then((result) => {
-					console.log(result.data);
-          const data = result.data;
-          let tempLabel =[];
-          let tempValues = [];
-          data.forEach(element => {
-            tempLabel.push(element._id);
-            tempValues.push(element.count);
-          });
-          setLabels(tempLabel);
-          setValues(tempValues);
-          setHasError(false);
-				})
-  },[path],labels,values)
+    axios.get(finalPath, {
+      headers: headers
+    }).then((result) => {
+      console.log(result.data);
+      const data = result.data;
+      let tempLabel = [];
+      let tempValues = [];
+      data.forEach(element => {
+        tempLabel.push(element._id);
+        tempValues.push(element.count);
+      });
+      setLabels(tempLabel);
+      setValues(tempValues);
+      setHasError(false);
+    })
+  }, [path], labels, values)
   if (hasError) {
     return <div><h1>Loading....</h1></div>
-}
-  return ( 
-    <div>
-      <PieChart labels ={labels} values= {values} options={options} setLevel={setLevel} setExtraValue={setExtraValue} />
+  }
+  return (
+    <div className={"m-md-3 m-xs-2 mt-3"}>
+      <Card>
+        <CardBody>
+        <CardTitle tag="h5">Card title</CardTitle>
+          <PieChart labels={labels} values={values} options={options} setExtraValue={setExtraValue} height={550} width={600}/>
+        </CardBody>
+      </Card>
     </div>
-   );
+  );
 }
- 
+
 export default ByState;
 
 
@@ -118,9 +133,9 @@ export default ByState;
 //     <div>
 //         <Bar data={data} options={options}  />
 //         {val && console.log("yes it worked")}
-        
+
 //     </div>
 //    );
 // }
- 
+
 // export default Graph;
