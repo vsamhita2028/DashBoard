@@ -34,7 +34,7 @@ const CollegeByCourses = ({ name, lightMode }) => {
         })
     }, [path, name], colleges)
     return (
-        <div style={{height :"100%",paddingBottom :"2em"}} >
+        <div style={{height :"100vh",paddingBottom :"2em"}} >
             <Row>
                 <Col className={"pl-4 pt-2 mt-3 box-light"}>
                     <Breadcrumb>
