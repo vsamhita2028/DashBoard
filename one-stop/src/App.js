@@ -16,7 +16,7 @@ function App() {
     backgroundColor : "#1D1D1D",
   }
   return (
-    <div className="App" style={{padding :0,margin:0,height:"100vh"}}>
+    <div className="App" >
       <Navbars lightMode={lightMode} toggleLightMode={toggleLightMode} />
       <Container fluid  style={lightMode ?{color: "black"} : dark } >
         <Router>

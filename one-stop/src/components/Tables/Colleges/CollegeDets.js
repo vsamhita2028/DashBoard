@@ -4,17 +4,19 @@ import axios from "axios";
 import { useState } from "react";
 import StudentDets from "../Students/StudentsDets"
 import SimilarColleges from "./SimilarColleges";
-import { Card,CardBody } from "reactstrap";
+import { Card, CardBody } from "reactstrap";
 import { Breadcrumb, BreadcrumbItem, Row, Col } from 'reactstrap';
-
+import { useHistory } from "react-router-dom";
+import { RiArrowGoBackFill } from "react-icons/ri"
 const CollegeDets = ({ name, lightMode }) => {
     const path = useContext(PathContext);
+    let history = useHistory();
     const [Students, setStudents] = useState(null);
-    const dark ={
+    const dark = {
         color: "white",
-        backgroundColor : "#2C2C2C",
-        border :"none",
-      }
+        backgroundColor: "#2C2C2C",
+        border: "none",
+    }
     useEffect(() => {
         const headers = { 'Content-Type': 'application/json' };
         const finalPath = path + "/college/college-dets";
@@ -33,22 +35,23 @@ const CollegeDets = ({ name, lightMode }) => {
         })
     }, [path, name])
     return (
-        <div>
+        <div style={{height :"100%"}}>
             <Row >
                 <Col className={"pl-4 pt-2 mt-3 box-light"}>
                     <Breadcrumb>
-                        <BreadcrumbItem > Home</BreadcrumbItem>
+                        <span onClick={() => history.goBack()} style={{ marginRight: "0.5em" }} ><RiArrowGoBackFill />  </span>
+                        <BreadcrumbItem > {"Home"}</BreadcrumbItem>
                         <BreadcrumbItem >By Location</BreadcrumbItem>
                         <BreadcrumbItem active>Similar Colleges and Student details</BreadcrumbItem>
                     </Breadcrumb>
                 </Col>
             </Row>
-            <Card className="m-md-3 m-xs-2 mt-3" style={lightMode ?{color: "black"} : dark }>
+            <Card className="m-md-3 m-xs-2 mt-3" style={lightMode ? { color: "black" } : dark}>
                 <CardBody>
                     <SimilarColleges name={name} lightMode={lightMode} />
                 </CardBody>
             </Card>
-            <Card className="m-md-3 m-xs-2 mt-3" style={lightMode ?{color: "black"} : dark }>
+            <Card className="m-md-3 m-xs-2 mt-3" style={lightMode ? { color: "black" } : dark}>
                 <CardBody>
                     <StudentDets data={Students} lightMode={lightMode} />
                 </CardBody>

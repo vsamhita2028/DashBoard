@@ -5,20 +5,23 @@ import { useState } from "react";
 import { Table } from 'reactstrap';
 import { Card, CardBody } from "reactstrap";
 import { Breadcrumb, BreadcrumbItem, Row, Col } from 'reactstrap';
+import { RiArrowGoBackFill } from "react-icons/ri"
+import { useHistory } from "react-router-dom";
+import '../../../App.css';
 
-
-const CollegeByCourses = ({ name,lightMode }) => {
+const CollegeByCourses = ({ name, lightMode }) => {
     const path = useContext(PathContext);
+    let history = useHistory();
     const [colleges, setColleges] = useState(null);
-    const dark ={
+    const dark = {
         color: "white",
-        backgroundColor : "#2C2C2C",
-        border :"none",
-      }
+        backgroundColor: "#2C2C2C",
+        border: "none"
+    }
     useEffect(() => {
         const headers = { 'Content-Type': 'application/json' };
         const finalPath = path + "/college/byCourses";
-        
+
         axios.get(finalPath, {
             params: {
                 name: name
@@ -31,18 +34,19 @@ const CollegeByCourses = ({ name,lightMode }) => {
         })
     }, [path, name], colleges)
     return (
-        <div >
+        <div style={{height :"92.5vh"}} >
             <Row>
                 <Col className={"pl-4 pt-2 mt-3 box-light"}>
                     <Breadcrumb>
+                        <span onClick={() => history.goBack()} style={{ marginRight: "0.5em" }} ><RiArrowGoBackFill />  </span>
                         <BreadcrumbItem >Home</BreadcrumbItem>
-                        <BreadcrumbItem active>By A Specific Course</BreadcrumbItem>
+                        <BreadcrumbItem active>Course - {name}</BreadcrumbItem>
                     </Breadcrumb>
                 </Col>
             </Row>
-            <Card className="m-md-3 m-xs-2 mt-3" style={lightMode ?{color: "black"} : dark } >
+            <Card className="m-md-3 m-xs-2 mt-3" style={lightMode ? { color: "black" } : dark} >
                 <CardBody>
-                    <Table responsive borderless style={lightMode ?{color: "black"} : dark }>
+                    <Table responsive borderless style={lightMode ? { color: "black" } : dark}>
                         <thead>
                             <tr>
                                 <th>S.No</th>
@@ -55,7 +59,7 @@ const CollegeByCourses = ({ name,lightMode }) => {
                         <tbody>
                             {colleges &&
                                 colleges.map((elem, indx) =>
-                                    <tr key={indx} className={lightMode ? " ":"trdark"}>
+                                    <tr key={indx} className={lightMode ? "pointer" : "trdark "}>
                                         <th scope="row">{indx + 1}</th>
                                         <td >{elem.Name}</td>
                                         <td>{elem.FoundedYear}</td>

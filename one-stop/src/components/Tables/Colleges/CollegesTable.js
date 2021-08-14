@@ -1,19 +1,19 @@
 import { Table } from 'reactstrap';
 import { useHistory } from "react-router-dom";
-const MediumSize = ({ data,setProps,lightMode }) => {
+const MediumSize = ({ data, setProps, lightMode }) => {
     let history = useHistory();
-    const SetValues =(name)=>{
+    const SetValues = (name) => {
         setProps(name);
         history.push("/byLocation/collegeDets");
     }
-    const dark ={
+    const dark = {
         color: "white",
-        backgroundColor : "#2C2C2C",
-        border :"none",
-      }
+        backgroundColor: "#2C2C2C",
+        border: "none",
+    }
     return (
         <div >
-            <Table borderless responsive style={lightMode ?{color: "black"} : dark } >
+            <Table borderless responsive style={lightMode ? { color: "black" } : dark} >
                 <thead >
                     <tr>
                         <th>S.No</th>
@@ -26,10 +26,10 @@ const MediumSize = ({ data,setProps,lightMode }) => {
                 </thead>
                 <tbody>
                     {data &&
-                        data.map((elem, indx) => 
-                            <tr key={indx} className={lightMode ? " ":"trdark"}>
-                                <th scope="row">{indx+1}</th>
-                                <td onClick={()=>SetValues(elem.Name)} className={"pointer"}>{elem.Name}</td>
+                        data.map((elem, indx) =>
+                            <tr key={indx} className={lightMode ? " pointer" : "trdark pointer"} onClick={() => SetValues(elem.Name)} >
+                                <th scope="row">{indx + 1}</th>
+                                <td >{elem.Name}</td>
                                 <td>{elem.FoundedYear}</td>
                                 <td className={"text-left"}>{elem.Courses}</td>
                                 <td>{elem.Strength}</td>

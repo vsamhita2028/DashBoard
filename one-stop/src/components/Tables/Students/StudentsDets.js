@@ -1,14 +1,14 @@
 
 import { Table } from 'reactstrap';
-const StudentDets = ({ data ,lightMode }) => {
-    const dark ={
+const StudentDets = ({ data, lightMode }) => {
+    const dark = {
         color: "white",
-        backgroundColor : "#2C2C2C",
-        border :"none",
-      }
+        backgroundColor: "#2C2C2C",
+        border: "none",
+    }
     return (
         <div className="m-3">
-            <Table responsive borderless style={lightMode ?{color: "black"} : dark }>
+            <Table responsive borderless style={lightMode ? { color: "black" } : dark}>
                 <thead>
                     <tr>
                         <th>S.No</th>
@@ -21,7 +21,7 @@ const StudentDets = ({ data ,lightMode }) => {
                 <tbody>
                     {data &&
                         data.map((elem, indx) =>
-                            <tr key={indx} className={lightMode ? " ":"trdark"}>
+                            <tr key={indx} className={lightMode ? "pointer" : "trdark pointer"}>
                                 <th scope="row">{indx + 1}</th>
                                 <td>{elem.Name}</td>
                                 <td>{elem.Id}</td>

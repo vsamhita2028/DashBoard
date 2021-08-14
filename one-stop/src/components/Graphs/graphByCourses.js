@@ -6,13 +6,14 @@ import DoughnutChart from "./DoughnutChart";
 import { useHistory } from "react-router-dom";
 import { Spinner } from 'reactstrap';
 import { Row, Col, Card, CardBody, CardTitle, Container } from "reactstrap";
-const ByCourse = ({ setExtraValue,lightMode }) => {
+const ByCourse = ({ setExtraValue, lightMode }) => {
   const path = useContext(PathContext);
   let history = useHistory();
-  const dark ={
+  const dark = {
     color: "white",
-    backgroundColor : "#2C2C2C",
-    border :"none",
+    backgroundColor: "#2C2C2C",
+    border: "none",
+
   }
   const [labels, setLabels] = useState(null);
   const [values, setValues] = useState(null);
@@ -49,7 +50,7 @@ const ByCourse = ({ setExtraValue,lightMode }) => {
     })
   }, [path], labels, values)
   if (hasError) {
-    return <div style={{display:"flex", textAlign : "center",alignItems:"center",justifyContent :"center",height:"80vh"}}>
+    return <div style={{ display: "flex", textAlign: "center", alignItems: "center", justifyContent: "center", height: "80vh" }}>
       <Spinner type="grow" color="success" >{" "}</Spinner>
       <Spinner type="grow" color="danger" >{" "}</Spinner>
       <Spinner type="grow" color="warning" >{" "}</Spinner>
@@ -61,7 +62,7 @@ const ByCourse = ({ setExtraValue,lightMode }) => {
       <Container fluid>
         <Row className={"m-md-3 m-xs-2 mt-3"}>
           <Col>
-            <Card style={lightMode ?{color: "black"} : dark } >
+            <Card style={lightMode ? { color: "black" } : dark} >
               <CardBody >
                 <CardTitle tag="h5">Based on Common Courses</CardTitle>
                 <DoughnutChart labels={labels} values={values} options={options} setExtraValue={setExtraValue} height={523} width={600} lightMode={lightMode} />
