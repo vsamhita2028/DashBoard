@@ -1,5 +1,4 @@
 import Navbars from "./components/Navbar"
-import 'bootstrap/dist/css/bootstrap.min.css';
 import State from "./components/Graphs/graphByState"
 import Courses from "./components/Graphs/graphByCourses";
 import College from "./components/Tables/Colleges/CollegeParent";
