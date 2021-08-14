@@ -37,7 +37,7 @@ const CollegeByState = ({ state, setProps, lightMode }) => {
         })
     }, [path, state])
     return (
-        <div style={{height :"92.5vh"}} >
+        <div style={{height :"100%",paddingBottom :"2em"}} >
             <Row >
                 <Col className={"pl-4 pt-2 mt-3 box-light"}>
                     <Breadcrumb>
