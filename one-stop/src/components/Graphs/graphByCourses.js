@@ -31,12 +31,10 @@ const ByCourse = ({ setExtraValue,lightMode }) => {
     maintainAspectRatio: false
   }
   useEffect(() => {
-    const headers = { 'Content-Type': 'application/json' };
+    // const headers = { 'Content-Type': 'application/json' };
     const finalPath = path + "/college/getcount-by-course";
-
-    axios.get(finalPath, {
-      headers: headers
-    }).then((result) => {
+    console.log(finalPath)
+    axios.get(finalPath).then((result) => {
       console.log(result.data);
       const data = result.data;
       let tempLabel = [];
